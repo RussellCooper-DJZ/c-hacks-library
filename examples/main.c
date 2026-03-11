@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/bit_hacks.h"
-#include "../include/macro_hacks.h"
-#include "../include/memory_hacks.h"
-#include "../include/perf_hacks.h"
+#include "bit_hacks.h"
+#include "macro_hacks.h"
+#include "memory_hacks.h"
+#include "perf_hacks.h"
 
 // 演示 container_of
 typedef struct {

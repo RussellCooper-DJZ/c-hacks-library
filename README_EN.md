@@ -39,13 +39,16 @@ This is a collection of various "clever tricks," advanced techniques, hacks, and
 1. Copy the header files from `include/` into your project.
 2. Include the necessary header files, e.g., `#include "macro_hacks.h"`.
 3. Refer to `examples/main.c` for usage examples.
+4. **Configure Compilation Environment**: Configure your compiler to correctly locate header files based on your development environment. For details, please refer to [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md).
 
 ## Compile Example
 
 ```bash
-gcc -O3 examples/main.c -o c_hacks_demo
+gcc -O3 -I./include examples/main.c -o c_hacks_demo
 ./c_hacks_demo
 ```
+
+For more detailed compilation instructions, please refer to [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md).
 
 ## Notes
 

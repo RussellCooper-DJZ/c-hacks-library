@@ -39,13 +39,16 @@
 1. 将 `include/` 下的头文件复制到你的项目中。
 2. 根据需要包含相应的头文件，例如 `#include "macro_hacks.h"`。
 3. 参考 `examples/main.c` 中的用法进行集成。
+4. **配置编译环境**：根据您的开发环境，配置编译器以正确找到头文件。详情请参考 [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md)。
 
 ## 编译示例
 
 ```bash
-gcc -O3 examples/main.c -o c_hacks_demo
+gcc -O3 -I./include examples/main.c -o c_hacks_demo
 ./c_hacks_demo
 ```
+
+更多详细的编译指南，请参考 [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md)。
 
 ## 注意事项
 
