@@ -66,4 +66,4 @@ Wir freuen uns über Beiträge zu dieser Bibliothek! Um beizutragen, befolgen Si
 5. Senden Sie einen **Pull Request (PR)** an den `master`-Branch. Ihr PR wird vor dem Mergen überprüft.
 
 ---
-*Generiert und organisiert von Manus AI.*
+*Generiert und organisiert von russellcooper.*
