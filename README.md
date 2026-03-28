@@ -1,59 +1,62 @@
-# C 语言奇技淫巧代码库 (C Hacks Library)
+# C Hacks Library
 
-这是一个收集了国内外 C 语言中各种“奇技淫巧”、高级技巧、黑科技以及性能优化手段的代码库。旨在提供可复用、高性能且具有启发性的代码片段。
+A collection of useful C utility functions, data structures, and low-level hacks for embedded systems and performance-critical applications.
 
-## 目录结构
+## Features
 
-- `include/`: 核心头文件，按功能分类。
-  - `bit_hacks.h`: 位运算黑科技（快速范围判断、快速除法、位扫描等）。
-  - `macro_hacks.h`: 宏定义与预处理技巧（`container_of`、C11 泛型、分支预测等）。
-  - `memory_hacks.h`: 内存与指针技巧（指针标记、对齐、变长结构体等）。
-  - `perf_hacks.h`: 性能优化与编译器特性（Duff's Device、循环展开、预取等）。
-- `examples/`: 使用示例，演示如何集成到项目中。
-- `docs/`: 详细的技术原理说明文档。
+- **Memory Management**: Custom allocators and pool allocators for deterministic allocation
+- **Data Structures**: Lock-free ring buffers, intrusive linked lists, and hash maps
+- **Bit Manipulation**: Fast bit-twiddling utilities (popcount, CLZ, bit reversal)
+- **String Utilities**: Zero-allocation string processing for embedded targets
+- **Math Utilities**: Fixed-point arithmetic, fast inverse square root, lookup tables
 
-## 核心技巧亮点
+## Getting Started
 
-### 1. 位运算篇 (Bit Twiddling Hacks)
-- **快速范围判断**: `(uint32_t)(x - min) <= (uint32_t)(max - min)`。利用无符号溢出特性，将两次比较合并为一次，减少分支。
-- **快速除以 255**: `(x + ((x + 257) >> 8)) >> 8`。在图像处理等场景中替代昂贵的除法运算。
-- **向上取 2 的幂**: 经典的位移填充算法，常用于内存分配器的对齐计算。
+### Prerequisites
 
-### 2. 宏与预处理篇 (Macro Magic)
-- **`container_of`**: Linux 内核的灵魂宏。通过成员指针反推结构体起始地址，是实现通用链表、树等容器的基础。
-- **C11 `_Generic`**: 实现伪重载，根据参数类型自动选择处理逻辑，提升代码的泛型能力。
-- **`likely/unlikely`**: 显式分支预测优化，指导编译器调整指令流水线，减少流水线气泡。
+- GCC >= 9.0 or Clang >= 10.0
+- CMake >= 3.16
+- Optional: Unity test framework for running tests
 
-### 3. 内存与指针篇 (Memory & Pointers)
-- **指针标记 (Pointer Tagging)**: 利用 64 位指针低 3 位的对齐空隙存储元数据（如引用计数、类型标签），极大地节省空间。
-- **柔性数组 (Flexible Array Member)**: C99 标准技巧，实现变长缓冲区，减少内存碎片并提高缓存局部性。
-- **匿名联合体**: 允许通过多种方式访问同一块内存（如 `v.x` 或 `v.v[0]`），在数学库和协议解析中非常实用。
-
-### 4. 性能优化篇 (Performance Optimization)
-- **Duff's Device**: 经典的循环展开手段，利用 `switch-case` 的穿透特性处理非 8 倍数的剩余数据。
-- **自动资源释放 (`__cleanup__`)**: 模仿 C++ 的 RAII，利用 GCC 扩展实现变量离开作用域时自动释放资源（如关闭文件、释放内存）。
-- **内存屏障与预取**: 底层并发编程和缓存优化的必备工具。
-
-## 如何使用
-
-1. 将 `include/` 下的头文件复制到你的项目中。
-2. 根据需要包含相应的头文件，例如 `#include "macro_hacks.h"`。
-3. 参考 `examples/main.c` 中的用法进行集成。
-4. **配置编译环境**：根据您的开发环境，配置编译器以正确找到头文件。详情请参考 [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md)。
-
-## 编译示例
+### Build
 
 ```bash
-gcc -O3 -I./include examples/main.c -o c_hacks_demo
-./c_hacks_demo
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j$(nproc)
 ```
 
-更多详细的编译指南，请参考 [COMPILATION_GUIDE.md](docs/COMPILATION_GUIDE.md)。
+### Run Tests
 
-## 注意事项
+```bash
+cd build
+ctest --output-on-failure
+```
 
-- 部分技巧依赖于特定的编译器扩展（如 GCC/Clang 的 `__attribute__`），在跨平台使用时请注意宏定义的兼容性处理。
-- 奇技淫巧虽好，但请务必在代码中添加充分的注释，以免增加维护成本。
+## Usage
 
----
-*由 Manus 自动生成并整理。*
+```c
+#include "hacks/ring_buffer.h"
+#include "hacks/bit_utils.h"
+
+// Lock-free ring buffer example
+ring_buffer_t rb;
+ring_buffer_init(&rb, buffer, sizeof(buffer));
+ring_buffer_push(&rb, &data, sizeof(data));
+
+// Fast bit counting
+uint32_t val = 0xDEADBEEF;
+int bits = hacks_popcount32(val);
+```
+
+## API Reference
+
+See `docs/api.md` for full API documentation.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+MIT License
