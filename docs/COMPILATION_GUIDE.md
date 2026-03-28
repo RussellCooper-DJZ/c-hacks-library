@@ -62,4 +62,4 @@ gcc -O3 -I./include examples/main.c -o c_hacks_demo
 -   **编译警告/错误**：部分“奇技淫巧”可能依赖于特定的 C 标准版本（如 C99, C11）或编译器扩展（如 GCC 的 `__attribute__`）。如果遇到编译问题，请尝试使用 `-std=c11` 或 `-std=gnu11` 等参数，并确保您的编译器版本支持相关特性。
 
 ---
-*由 Manus AI 自动生成并整理。*
+*由 russellcooper 自动生成并整理。*
